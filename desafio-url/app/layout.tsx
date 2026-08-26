@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 import "./globals.css";
 
@@ -34,7 +35,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>
+          <Header  />
+          {children}
+          <Footer />
+      </body>
     </html>
   );
 }

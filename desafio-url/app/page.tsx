@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -40,41 +41,8 @@ export default function Home() {
   }
 
   return (
-    <section className="flex flex-col w-full h-full bg-blue-50 ">
-      <div className="flex flex-row justify-between items-center outline-solid outline-slate-200 bg-white">
-        <div className="flex flex-col justify-start items-start">
-          <h1 className="ml-20 text-[30px] font-bold ">LabTec</h1>
-          <p className="ml-20  text-[15px] text-gray-500">UniSatc</p>
-        </div>
-        <nav className="flex gap-5 items-center justify-end mr-10">
-          <a
-            href="#"
-            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-full after:bg-blue-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-blue-600 font-semibold"
-          >
-            Inicio
-          </a>
-          <a
-            href="#"
-            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-full after:bg-blue-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-blue-600 font-semibold"
-          >
-            Meus Links
-          </a>
-          <a
-            href="#"
-            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-full after:bg-blue-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-blue-600 font-semibold"
-          >
-            Estatisticas
-          </a>
-          <a
-            href="#"
-            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-full after:bg-blue-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-blue-600 font-semibold"
-          >
-            Sobre
-          </a>
-        </nav>
-      </div>
 
-      <div className=" flex flex-col mt-10 w-full h-screen justify-center items-center p-50 font-sans">
+      <div className=" flex flex-col mb-20 w-full h-screen justify-center items-center p-50 font-sans">
         <h1 className="text-[30px] font-bold ">Encurte URLs com o LabTec</h1>
         <p className="text-[20px] text-gray-500">
           Transforme links longos em URLs e compartilhe com facilidade
@@ -86,7 +54,7 @@ export default function Home() {
         >
           <label className="text-[20px] font-bold ">URL original</label>
           <input
-            className="border-1 border-gray-500 rounded-md h-12"
+            className="border-1 border-gray-500 rounded-md h-12 p-2"
             placeholder="https://exemplo.com/pagina/muito/grande/que/ninguém/quer/compartilhar"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -102,7 +70,7 @@ export default function Home() {
             <div className="flex flex-row items-center gap-2 border-1 border-gray-500 h-12 rounded-lg bg-slate-50">
               <p className="text-gray-500 ml-3">labtec.satc.edu.br/link/</p>
               <input
-                className="border-gray-500 border-l-1 rounded-r-lg h-full w-full bg-white"
+                className="border-gray-500 border-l-1 rounded-r-lg h-full w-full bg-white p-2"
                 placeholder="seu-alias-aqui"
                 value={alias}
                 onChange={(e) => setAlias(e.target.value)}
@@ -154,14 +122,5 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="flex flex-row items-center justify-center mt-5">
-        <span className="material-symbols-outlined text-gray-500">
-          verified_user
-        </span>
-        <p className="text-gray-500">
-          Links seguros, rastreáveis e prontos para compartilhar
-        </p>
-      </div>
-    </section>
   );
 }
