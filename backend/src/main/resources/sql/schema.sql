@@ -1,12 +1,12 @@
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
                        name VARCHAR(255) NOT NULL ,
                        password_hash VARCHAR(500) NOT NULL,
                        email VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE urls (
+CREATE TABLE IF NOT EXISTS urls (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
                       short_code VARCHAR(500) NOT NULL UNIQUE,
                       link VARCHAR(500) NOT NULL,

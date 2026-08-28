@@ -9,7 +9,7 @@ export default function Header() {
       </div>
       <nav className="flex gap-5 items-center justify-end mr-10">
         <Link
-          href="/"
+          href="/inicio"
           className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-full after:bg-blue-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-blue-600 font-semibold"
         >
           Inicio

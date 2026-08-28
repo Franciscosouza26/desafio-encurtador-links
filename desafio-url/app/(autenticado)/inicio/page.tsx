@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { api } from "@/app/lib/api";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Page() {
@@ -29,13 +32,22 @@ export default function Page() {
     }
 
     setIsLoading(true);
-    // Simulação local: sem backend ainda, apenas gera um slug fake.
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const slug = alias || Math.random().toString(36).slice(2, 8);
-    setShortLink(slug);
-    setIsLoading(false);
-  }
+    try {
+      await api.post("/url/user", { shortCode: alias || null, link: url});
+      
+      const { data } = await api.get("/url/user");
+      const created = data 
+        .filter((items: any) => items.link === url )
+        .sort((a: any, b: any) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime())[0];
 
+      setShortLink(created?.shortCode ?? alias ?? "");
+     } catch {
+       setError("Não foi possível encurtar este link.")
+     } finally {
+       setIsLoading(false);
+     }
+    }
+    
   function handleCopy() {
     if (shortLink) navigator.clipboard.writeText(`labtec.satc.edu.br/link/${shortLink}`);
   }
