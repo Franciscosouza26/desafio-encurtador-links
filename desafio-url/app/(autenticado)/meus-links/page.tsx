@@ -18,7 +18,7 @@ export default function Page() {
     useEffect(() => {
         async function loadLinks() {
             try {
-            const { data } = await api.get("/url/user");
+            const { data } = await api.get("/url/user/list");
             setLinks(data);
         }   catch {
             setError("Não foi possível carregar seus links. ");
@@ -33,7 +33,7 @@ return (
     <div className="flex flex-col gap-4 p-10">
         {links.map((l) => (
             <div key={l.id} className="flex flex-row justify-between border rounded-lg p-4">
-                <span>labtec.satc.edu.br/link/{l.shortCode}</span>
+                <span>https://labtec.satc.edu.br/link/{l.shortCode}</span>
                 <span>{l.link}</span>
                 <span>{l.access_count} acessos</span>
             </div>

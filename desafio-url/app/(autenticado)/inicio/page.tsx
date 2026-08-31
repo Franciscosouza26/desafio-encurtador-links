@@ -12,6 +12,7 @@ export default function Page() {
   const [shortLink, setShortLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [copied, setCopied ] = useState(false);
 
   function isValidUrl(value: string) {
     try {
@@ -33,9 +34,9 @@ export default function Page() {
 
     setIsLoading(true);
     try {
-      await api.post("/url/user", { shortCode: alias || null, link: url});
+      await api.post("/url", { shortCode: alias || null, link: url});
       
-      const { data } = await api.get("/url/user");
+      const { data } = await api.get("/url/user/list");
       const created = data 
         .filter((items: any) => items.link === url )
         .sort((a: any, b: any) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime())[0];
@@ -49,7 +50,10 @@ export default function Page() {
     }
     
   function handleCopy() {
-    if (shortLink) navigator.clipboard.writeText(`labtec.satc.edu.br/link/${shortLink}`);
+    if (!shortLink) return;
+    navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_API_URL}/url/${shortLink}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   return (
@@ -120,7 +124,7 @@ export default function Page() {
               <div className="flex flex-row gap-5 ">
                 <p className="flex items-center border-1 border-gray-500 rounded-lg bg-white h-12 w-[650px] gap-2 text-blue-600 text-md font-bold ">
                   <span className="material-symbols-outlined ml-5">link_2</span>
-                  labtec.satc.edu.br/link/{shortLink}
+                  https://labtec.satc.edu.br/link/{shortLink}
                 </p>
                 <button
                   onClick={handleCopy}
@@ -129,10 +133,21 @@ export default function Page() {
                   <span className="material-symbols-outlined">content_copy</span>
                   Copiar
                 </button>
-              </div>
+              </div> 
             </div>
           </div>
         )}
+        {copied && (
+                  <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex flex-col gap-2 bg-blue-600 text-white px-5 py-3 rounded-lg shadow-lg">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined">check_circle</span>
+                      Link copiado com sucesso!
+                    </div>
+                    <div className="h-1 w-full bg-white/30 rounded-full overflow-hidden" >
+                      <div className="h-full bg-white rounded-full" style={{ animation: "shrink 1s linear forwards" }} />
+                    </div>
+                  </div>
+                    )}
       </div>
   );
 }

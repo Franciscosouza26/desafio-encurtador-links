@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS urls (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
                       short_code VARCHAR(500) NOT NULL UNIQUE,
                       link VARCHAR(500) NOT NULL,
+                      creator_ip VARCHAR(45),
                       access_count INT NOT NULL DEFAULT 0,
                       created_at TIMESTAMP NOT NULL,
                       last_access TIMESTAMP NULL,
@@ -19,3 +20,5 @@ CREATE TABLE IF NOT EXISTS urls (
                           FOREIGN KEY (user_id)
                               REFERENCES users(id)
 );
+
+ALTER TABLE urls ADD COLUMN creator_ip VARCHAR(45);

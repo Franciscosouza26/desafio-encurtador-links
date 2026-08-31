@@ -23,7 +23,7 @@ public class UrlController {
 
     private final IUrlService urlService;
 
-    @PostMapping(path = "/user")
+    @PostMapping
     public ResponseEntity<String> createLink (@RequestBody @Valid CreateUrlRequestDto requestDto, HttpServletRequest request) {
         boolean isCreated = urlService.createLink(requestDto,request);
         if (isCreated){
@@ -33,7 +33,7 @@ public class UrlController {
         }
     }
 
-    @GetMapping(path = "/user")
+    @GetMapping(path = "/user/list")
     public ResponseEntity<List<UrlDto>> getAllUrl (){
         List<UrlDto> urlList = urlService.getAllUrlForUser();
         return ResponseEntity.ok().body(urlList);
