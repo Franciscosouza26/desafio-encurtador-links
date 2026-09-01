@@ -30,13 +30,15 @@ export default function Page() {
 if (error) return <p className="text-red-500">{error}</p>;
 
 return (
-    <div className="flex flex-col gap-4 p-10">
+    <div className="flex flex-col gap-5 p-10">
         {links.map((l) => (
-            <div key={l.id} className="flex flex-row justify-between border rounded-lg p-4">
-                <span>https://labtec.satc.edu.br/link/{l.shortCode}</span>
+            <div key={l.id} className="flex flex-row justify-between border-1 border-gray-500 rounded-lg gap-5 p-5 font-semibold text-blue-600 bg-white shadow-sm ">
+                <span className="material-symbols-outlined">link_2</span>
+                <span>http://localhost:8081/url/{l.shortCode}</span>
                 <span>{l.link}</span>
                 <span>{l.access_count} acessos</span>
             </div>
+
         ))}
     </div>
 );
